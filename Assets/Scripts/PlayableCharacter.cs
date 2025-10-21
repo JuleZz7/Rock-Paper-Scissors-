@@ -24,6 +24,9 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     [SerializeField]
     protected float specialAbilityDistance = 5;
 
+    [SerializeField]
+    private Transform rayCastTransform;
+
 
     private void Awake()
     {
@@ -66,7 +69,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     }
 
 
-    public int MaxHp = 3;
+    public int MaxHp = 1;
     public int CurrentHp { get; set; }
 
     void ApplyDamage(IDamagable damagable)
@@ -92,10 +95,12 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     {
         RaycastHit hitInfo;
 
-        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, specialAbilityDistance, specialAbilityLayerMask))
+        if (Physics.Raycast(rayCastTransform.position, transform.forward, out hitInfo, specialAbilityDistance, specialAbilityLayerMask))
         {
             Trap hitTrap = hitInfo.transform.GetComponentInParent<Trap>();
             hitTrap.Interact();
+            Debug.Log(hitTrap.gameObject.name);
+
         }
     }
 }
