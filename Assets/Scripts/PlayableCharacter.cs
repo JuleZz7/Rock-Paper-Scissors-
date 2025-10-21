@@ -25,7 +25,7 @@ public abstract class PlayableCharacter : MonoBehaviour, IDamagable
     protected float specialAbilityDistance = 5;
 
     [SerializeField]
-    private Transform rayCastTransform;
+    protected Transform rayCastTransform;
 
 
     private void Awake()
